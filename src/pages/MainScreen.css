@@ -1,0 +1,130 @@
+.main-container {
+  font-family: sans-serif;
+  padding: 20px;
+  max-width: 400px;
+  margin: auto;
+  text-align: center;
+  background-color: #fff;
+}
+
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.title {
+  flex-grow: 1;
+  text-align: center;
+  margin: 0;
+  font-size: 24px;
+}
+
+.icon {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.mode-selector {
+  display: flex;
+  justify-content: space-between;
+  background-color: #ddd;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+}
+
+.mode-button {
+  background: none;
+  border: none;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.scanner-section {
+  margin-bottom: 30px;
+}
+
+
+.power-icon {
+  font-size: 50px;
+  color: black;
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  padding-bottom: 3rem; 
+  padding-top: 3rem; 
+}
+
+
+.enable-button {
+  background-color: #ccc;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.instruction-text {
+  font-size: 14px;
+  color: #555;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.line {
+  flex: 1;
+  height: 1px;
+  background-color: #ccc;
+}
+
+.or-text {
+  margin: 0 10px;
+  color: #555;
+}
+
+.upload-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.upload-box {
+  background-color: #ddd;
+  padding: 20px;
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.format-text {
+  font-size: 12px;
+  color: #444;
+}
+
+.detect-button {
+  background-color: #ccc;
+  padding: 10px 30px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.mode-button.active {
+  font-weight: bold;
+  border-bottom: 2px solid black;
+}
+
+.upload-box:hover {
+  cursor: pointer;
+  background-color: #ccc;
+  transition: 0.3s;
+}
