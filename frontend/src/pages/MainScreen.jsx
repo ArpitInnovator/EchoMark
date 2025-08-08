@@ -2,10 +2,13 @@ import React, { useState, useRef } from 'react';
 import './MainScreen.css';
 import { FaInfoCircle, FaMoon, FaUndo, FaCog, FaImage, FaMicrophone, FaPowerOff } from 'react-icons/fa';
 import { MdTextFields } from 'react-icons/md';
+import { apiService } from '../services/api';
 
 const MainScreen = () => {
   const [selectedMode, setSelectedMode] = useState('image'); // image | text | audio
   const [file, setFile] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [result, setResult] = useState(null);
   const inputRef = useRef(null);
 
   const handleModeChange = (mode) => {
@@ -31,16 +34,33 @@ const MainScreen = () => {
     }
   };
 
-  const handleDetect = () => {
+  const handleDetect = async () => {
     if (!file) {
       alert("Please upload a file before detecting.");
       return;
     }
 
-    // Simulated upload logic
-    console.log(`Uploading ${selectedMode} file:`, file);
-    alert(`Detecting ${selectedMode} content from uploaded file: ${file.name}`);
-    // Here you'd send it to your backend for AI processing
+    setIsLoading(true);
+    setResult(null);
+
+    try {
+      let response;
+      
+      if (selectedMode === 'image') {
+        response = await apiService.checkImageFile(file);
+      } else if (selectedMode === 'text') {
+        const text = await file.text();
+        // response = await apiService.checkText(text);
+      }
+      
+      setResult(response);
+      console.log('Detection result:', response);
+    } catch (error) {
+      console.error('Detection failed:', error);
+      alert(`Detection failed: ${error.message}`);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const triggerFileInput = () => inputRef.current?.click();
@@ -101,8 +121,22 @@ const MainScreen = () => {
             onChange={handleFileChange}
           />
         </div>
-        <button className="detect-button" onClick={handleDetect}>Detect</button>
+        <button 
+          className="detect-button" 
+          onClick={handleDetect}
+          disabled={isLoading}
+        >
+          {isLoading ? 'Detecting...' : 'Detect'}
+        </button>
       </div>
+
+      {/* Add result display */}
+      {result && (
+        <div className="result-section">
+          <h3>Detection Result:</h3>
+          <pre>{JSON.stringify(result, null, 2)}</pre>
+        </div>
+      )}
     </div>
   );
 };
